@@ -33,7 +33,7 @@ allow_access_from: "127.0.0.1"
 install_nginx: true
 
 install_php: true
-php_version: 8.1
+php_version: 7.4
 
 install_composer: true
 
