@@ -1,4 +1,5 @@
 PYTHON ?= python
+GALAXY ?= ansible-galaxy
 
 
 help: Makefile
@@ -13,11 +14,13 @@ help: Makefile
 config:
 	$(PYTHON) -m pip install ansible
 	$(PYTHON) -m pip install ansible-lint
+	$(GALAXY) install -r requirements.yml
 
 
-## lint: Lint ansible files.
-lint:
-	ansible-lint -v
+## prod: Configure the server.
+prod:
+	@echo "\n>> ============= Run ============= <<"
+	ansible-playbook prod-playbook.yml --ask-vault-pass
 
 
-.PHONY: help lint config
+.PHONY: help prod config
