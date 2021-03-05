@@ -1,8 +1,12 @@
 ### Common Ansible Role
 
-This role creates monitoring user and group. Available configs to override:
+This role installs basic packages.
 
 ```yaml
-system_user: argon
-system_group: argon
+enable_fw: yes
+upgrade_pkgs: no
+update_pkgs: no
+
+system_user: appmgmt
+system_group: appmgmt
 ```

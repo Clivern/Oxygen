@@ -13,6 +13,18 @@
 # limitations under the License.
 
 ---
+helium_logrotate_scripts:
+  - name: helium
+    log_dir: '/srv/app/shared/log'
+    log_extension: 'log'
+    options:
+      - rotate 7
+      - daily
+      - size 10M
+      - missingok
+      - compress
+      - create 0644 root www-data
+
 app_user: appmgmt
 app_group: appmgmt
 
