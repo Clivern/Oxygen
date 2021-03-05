@@ -60,11 +60,11 @@ smtp_password: ''
 inet_interfaces: 127.0.0.1
 ```
 
-`Postfix` is disabled but can be enabled by setting `install_postfix: true` above and providing the SMTP Server, username and password. You can use your gmain account as an SMTP server by doing the following:
+`Postfix` is disabled but it can be enabled by setting `install_postfix: true` above and providing the SMTP Server, username and password. You can use your gmail account as an SMTP server by doing the following:
 
-- The SMTP server will be `smtp.gmail.com` and port `587`
-- The SMTP username is your gmail email address.
-- The SMTP password can be generated after enabling two factor authentication. Please check this guide to generate the app password https://www.golinuxcloud.com/gmail-smtp-relay-server-postfix/.
+- The `SMTP server` will be `smtp.gmail.com` and port `587`
+- The `SMTP username` is your gmail email address.
+- The `SMTP password` can be generated after enabling two factor authentication. Please check this guide to generate the app password https://www.golinuxcloud.com/gmail-smtp-relay-server-postfix/.
 
 5. Run ansible playbook to setup the server
 
