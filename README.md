@@ -14,7 +14,7 @@
 
 Please check examples directory for working examples:
 
-- [Server Setup Ubuntu 22.04](examples/server-setup/ubuntu/22.04/README.md): This will setup ubuntu 22.04 with `Nginx`, `PHP-FPM`, `PHP 8.1`, `Logrotate` ... etc
+- [Server Setup Ubuntu 22.04](examples/server-setup/ubuntu/22.04/README.md): This will setup Ubuntu 22.04 with `Nginx`, `PHP-FPM`, `PHP 8.1`, `Logrotate` ... etc
 
 
 ### Versioning
