@@ -27,12 +27,18 @@
     accept_hostkey: true
   tags: [ oxygen, helium ]
 
+- name: Remove cache directory
+  file:
+    path: /srv/app/releases/{{ app_version }}/var/cache
+    state: absent
+  tags: [ oxygen, helium ]
+
 - name: Ensure cache directory exists
   file:
     path: /srv/app/releases/{{ app_version }}/var/cache
     owner: "{{ app_user }}"
     group: "{{ app_group }}"
-    mode: '0755'
+    mode: '0775'
     state: directory
   tags: [ oxygen, helium ]
 
@@ -51,7 +57,7 @@
   notify: restart nginx
   tags: [ oxygen, helium ]
 
-- name: Remove current release logs
+- name: Remove current release log symlink
   file:
     path: /srv/app/releases/{{ app_version }}/var/log
     state: absent
@@ -81,12 +87,21 @@
     mode: "0755"
   tags: [ oxygen, helium ]
 
-- name: Update logs owner and permissions
+- name: Update log owner and permissions
   file:
     dest: /srv/app/shared/log
     owner: "{{ app_user }}"
     group: "www-data"
-    mode: "0755"
+    mode: "0775"
+    recurse: yes
+  tags: [ oxygen, helium ]
+
+- name: Update cache owner and permissions
+  file:
+    dest: /srv/app/releases/{{ app_version }}/var/cache
+    owner: "{{ app_user }}"
+    group: "www-data"
+    mode: "0775"
     recurse: yes
   tags: [ oxygen, helium ]
 

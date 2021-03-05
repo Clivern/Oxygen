@@ -42,12 +42,21 @@
     state: directory
   tags: [ oxygen, helium ]
 
-- name: Ensure shared logs directory exists
+- name: Ensure shared directory exists
+  file:
+    path: /srv/app/shared
+    owner: "{{ app_user }}"
+    group: "{{ app_group }}"
+    mode: '0755'
+    state: directory
+  tags: [ oxygen, helium ]
+
+- name: Ensure log directory exists
   file:
     path: /srv/app/shared/log
     owner: "{{ app_user }}"
     group: "{{ app_group }}"
-    mode: '0755'
+    mode: '0775'
     state: directory
   tags: [ oxygen, helium ]
 
