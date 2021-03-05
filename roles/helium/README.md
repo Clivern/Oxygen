@@ -7,7 +7,7 @@ app_user: appmgmt
 app_group: appmgmt
 
 app_version: 0.1.0
-git_repo: https://github.com/ionsio/helium.git
+git_repo: https://github.com/colvern/helium.git
 
 workers_counts: 1
 

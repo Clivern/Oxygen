@@ -3,8 +3,8 @@
     <h3 align="center">Oxygen</h3>
     <p align="center">Ansible Playbook to Deploy PHP Services.</p>
     <p align="center">
-        <a href="https://github.com/ionsio/Oxygen/actions/workflows/build.yml">
-            <img src="https://github.com/ionsio/Oxygen/actions/workflows/build.yml/badge.svg"/>
+        <a href="https://github.com/Colvern/Oxygen/actions/workflows/build.yml">
+            <img src="https://github.com/Colvern/Oxygen/actions/workflows/build.yml/badge.svg"/>
         </a>
     </p>
 </p>
@@ -63,8 +63,8 @@ $ ansible-vault create helium.vault.yml
 app_user: appmgmt
 app_group: appmgmt
 
-app_version: 0.5.0
-git_repo: git@github.com:ionsio/Helium.git
+app_version: 0.6.0
+git_repo: git@github.com:Colvern/Helium.git
 
 workers_counts: 1
 
@@ -94,12 +94,12 @@ $ make helium
 
 For transparency into our release cycle and in striving to maintain backward compatibility, Oxygen is maintained under the [Semantic Versioning guidelines](https://semver.org/) and release process is predictable and business-friendly.
 
-See the [Releases section of our GitHub project](https://github.com/ionsio/oxygen/releases) for changelogs for each release version of Oxygen. It contains summaries of the most noteworthy changes made in each release. Also see the [Milestones section](https://github.com/ionsio/oxygen/milestones) for the future roadmap.
+See the [Releases section of our GitHub project](https://github.com/colvern/oxygen/releases) for changelogs for each release version of Oxygen. It contains summaries of the most noteworthy changes made in each release. Also see the [Milestones section](https://github.com/colvern/oxygen/milestones) for the future roadmap.
 
 
 ### Bug tracker
 
-If you have any suggestions, bug reports, or annoyances please report them to our issue tracker at https://github.com/ionsio/oxygen/issues
+If you have any suggestions, bug reports, or annoyances please report them to our issue tracker at https://github.com/colvern/oxygen/issues
 
 
 ### Security Issues

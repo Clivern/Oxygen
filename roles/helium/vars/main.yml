@@ -28,8 +28,8 @@ helium_logrotate_scripts:
 app_user: appmgmt
 app_group: appmgmt
 
-app_version: 0.5.0
-git_repo: git@github.com:ionsio/Helium.git
+app_version: 0.6.0
+git_repo: git@github.com:Colvern/Helium.git
 
 workers_counts: 1
 
