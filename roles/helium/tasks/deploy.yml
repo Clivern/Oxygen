@@ -89,10 +89,15 @@
     recurse: yes
   tags: [ argon, helium ]
 
+- name: Install composer packages
+  become: yes
+  become_user: "{{ app_user }}"
+  shell: composer install -d /srv/app/releases/{{ app_version }}/ --no-dev --optimize-autoloader
+  tags: [ argon, helium ]
+
 - name: Migrate database
-  shell: php /srv/app/releases/{{ app_version }}/bin/console doctrine:schema:update --force >> /srv/app/releases/{{ app_version }}/migrate.log
+  shell: php /srv/app/releases/{{ app_version }}/bin/console doctrine:schema:update --force
   args:
-    creates: /srv/app/releases/{{ app_version }}/migrate.log
     executable: /bin/bash
   tags: [ argon, helium ]
 

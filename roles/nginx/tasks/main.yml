@@ -20,6 +20,8 @@
       - iptables-persistent
       - apache2-utils
       - python3-pip
+      - zip
+      - unzip
     state: present
   tags: [ argon, nginx ]
 

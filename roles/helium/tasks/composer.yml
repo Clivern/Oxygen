@@ -13,14 +13,26 @@
 # limitations under the License.
 
 ---
-- hosts: server
 
-  pre_tasks:
-    - name: Include prod vault
-      include_vars: "prod.vault.yml"
+- name: Create composer install script
+  template:
+    src: install_composer.sh.j2
+    dest: /srv/app/install_composer.sh
+    mode: '0755'
+  tags: [ argon, helium ]
 
-  roles:
-    - { role: roles/common, become: yes }
-    - { role: roles/database, become: yes }
-    - { role: roles/nginx, become: yes }
-    - { role: roles/php, become: yes }
+- name: Install composer
+  shell: ./install_composer.sh
+  args:
+    chdir: /srv/app/
+    executable: /bin/bash
+  tags: [ argon, helium ]
+
+- name: Move composer globally
+  command: mv /srv/app/composer.phar /usr/local/bin/composer
+
+- name: Set permissions on composer
+  become: true
+  file:
+    path: /usr/local/bin/composer
+    mode: "a+x"

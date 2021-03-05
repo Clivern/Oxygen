@@ -1,4 +1,5 @@
 PYTHON ?= python
+GALAXY ?= ansible-galaxy
 
 
 help: Makefile

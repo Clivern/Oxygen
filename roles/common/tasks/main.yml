@@ -70,6 +70,13 @@
     state: present
   tags: [ argon, common ]
 
+- name: Install zip package
+  apt:
+    pkg: zip
+    state: present
+    update_cache: true
+  tags: [ argon, common ]
+
 - name: Install unzip package
   apt:
     pkg: unzip
