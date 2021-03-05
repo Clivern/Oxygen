@@ -23,26 +23,26 @@
       - zip
       - unzip
     state: present
-  tags: [ argon, nginx ]
+  tags: [ oxygen, nginx ]
 
 - name: Install passlib python package
   pip:
     name: passlib
-  tags: [ argon, nginx ]
+  tags: [ oxygen, nginx ]
 
 - name: Ensure that the default site is disabled
   file:
     path: /etc/nginx/sites-enabled/default
     state: absent
   notify: reload nginx
-  tags: [ argon, nginx ]
+  tags: [ oxygen, nginx ]
 
 - name: Ensure nginx service is started
   service:
     name: nginx
     state: started
     enabled: yes
-  tags: [ argon, nginx ]
+  tags: [ oxygen, nginx ]
 
 - name: Setup logrotate scripts for nginx
   template:
@@ -51,4 +51,4 @@
     mode: "0644"
   with_items: "{{ nginx_logrotate_scripts }}"
   when: nginx_logrotate_scripts is defined
-  tags: [ argon, nginx ]
+  tags: [ oxygen, nginx ]

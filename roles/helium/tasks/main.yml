@@ -15,5 +15,4 @@
 ---
 - include_tasks: nginx.yml
 - include_tasks: pre-deploy.yml
-- include_tasks: composer.yml
 - include_tasks: deploy.yml

@@ -17,14 +17,15 @@
   file:
     path: /srv/app/releases/{{ app_version }}
     state: absent
-  tags: [ argon, helium ]
+  tags: [ oxygen, helium ]
 
 - name: Clone project code
   git:
     repo: "{{ git_repo }}"
     dest: /srv/app/releases/{{ app_version }}
     version: "{{ app_version }}"
-  tags: [ argon, helium ]
+    accept_hostkey: true
+  tags: [ oxygen, helium ]
 
 - name: Ensure cache directory exists
   file:
@@ -33,14 +34,14 @@
     group: "{{ app_group }}"
     mode: '0755'
     state: directory
-  tags: [ argon, helium ]
+  tags: [ oxygen, helium ]
 
 - name: Create .env config file
   template:
     src: env.j2
     dest: /srv/app/releases/{{ app_version }}/.env
     mode: '0755'
-  tags: [ argon, helium ]
+  tags: [ oxygen, helium ]
 
 - name: Update current release symlink
   file:
@@ -48,20 +49,20 @@
     dest: /srv/app/current
     state: link
   notify: restart nginx
-  tags: [ argon, helium ]
+  tags: [ oxygen, helium ]
 
 - name: Remove current release logs
   file:
     path: /srv/app/releases/{{ app_version }}/var/log
     state: absent
-  tags: [ argon, helium ]
+  tags: [ oxygen, helium ]
 
 - name: Update logs symlink
   file:
     src: /srv/app/shared/log
     dest: /srv/app/releases/{{ app_version }}/var/log
     state: link
-  tags: [ argon, helium ]
+  tags: [ oxygen, helium ]
 
 - name: Update release owner and permissions
   file:
@@ -70,7 +71,7 @@
     group: "www-data"
     mode: "0755"
     recurse: yes
-  tags: [ argon, helium ]
+  tags: [ oxygen, helium ]
 
 - name: Update current release owner and permissions
   file:
@@ -78,7 +79,7 @@
     owner: "{{ app_user }}"
     group: "www-data"
     mode: "0755"
-  tags: [ argon, helium ]
+  tags: [ oxygen, helium ]
 
 - name: Update logs owner and permissions
   file:
@@ -87,19 +88,19 @@
     group: "www-data"
     mode: "0755"
     recurse: yes
-  tags: [ argon, helium ]
+  tags: [ oxygen, helium ]
 
 - name: Install composer packages
   become: yes
   become_user: "{{ app_user }}"
   shell: composer install -d /srv/app/releases/{{ app_version }}/ --no-dev --optimize-autoloader
-  tags: [ argon, helium ]
+  tags: [ oxygen, helium ]
 
 - name: Migrate database
   shell: php /srv/app/releases/{{ app_version }}/bin/console doctrine:schema:update --force
   args:
     executable: /bin/bash
-  tags: [ argon, helium ]
+  tags: [ oxygen, helium ]
 
 - name: Create helium watcher service file
   template:
@@ -107,20 +108,20 @@
     dest: /etc/systemd/system/helium_watcher.service
     mode: "0750"
   notify: reload helium watcher service
-  tags: [ argon, helium ]
+  tags: [ oxygen, helium ]
 
 - name: Enable and start helium watcher service
   systemd:
     name: helium_watcher
     state: started
     enabled: yes
-  tags: [ argon, helium ]
+  tags: [ oxygen, helium ]
 
 - name: restart helium watcher service
   systemd:
     state: restarted
     name: helium_watcher
-  tags: [ argon, helium ]
+  tags: [ oxygen, helium ]
 
 - name: Create helium workers service file
   template:
@@ -128,7 +129,7 @@
     dest: /etc/systemd/system/helium_worker@.service
     mode: "0750"
   notify: reload helium workers service
-  tags: [ argon, helium ]
+  tags: [ oxygen, helium ]
 
 - name: Enable and start helium workers service
   systemd:
@@ -136,4 +137,4 @@
     state: started
     enabled: yes
   with_sequence: start=1 end="{{ workers_counts }}"
-  tags: [ argon, helium ]
+  tags: [ oxygen, helium ]

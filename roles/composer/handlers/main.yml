@@ -13,26 +13,3 @@
 # limitations under the License.
 
 ---
-
-- name: Create composer install script
-  template:
-    src: install_composer.sh.j2
-    dest: /srv/app/install_composer.sh
-    mode: '0755'
-  tags: [ argon, helium ]
-
-- name: Install composer
-  shell: ./install_composer.sh
-  args:
-    chdir: /srv/app/
-    executable: /bin/bash
-  tags: [ argon, helium ]
-
-- name: Move composer globally
-  command: mv /srv/app/composer.phar /usr/local/bin/composer
-
-- name: Set permissions on composer
-  become: true
-  file:
-    path: /usr/local/bin/composer
-    mode: "a+x"

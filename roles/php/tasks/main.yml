@@ -32,6 +32,6 @@
       - php{{ php_version }}-zip
       - php{{ php_version }}-bcmath
     state: present
-  tags: [ argon, php ]
+  tags: [ oxygen, php ]
 
 

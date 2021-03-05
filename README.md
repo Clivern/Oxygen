@@ -1,16 +1,16 @@
 <p align="center">
-    <img alt="Argon Logo" src="/static/logo.png?v=1.0.1" height="150" />
-    <h3 align="center">Argon</h3>
+    <img alt="Oxygen Logo" src="/static/logo.png?v=1.0.1" height="150" />
+    <h3 align="center">Oxygen</h3>
     <p align="center">Ansible Playbook to Deploy PHP Services.</p>
     <p align="center">
-        <a href="https://github.com/ionsio/Argon/actions/workflows/build.yml">
-            <img src="https://github.com/ionsio/Argon/actions/workflows/build.yml/badge.svg"/>
+        <a href="https://github.com/ionsio/Oxygen/actions/workflows/build.yml">
+            <img src="https://github.com/ionsio/Oxygen/actions/workflows/build.yml/badge.svg"/>
         </a>
     </p>
 </p>
 <br/>
 
-## Usage
+### Server Setup
 
 1. Create a python virtual environment.
 
@@ -48,7 +48,12 @@ allow_access_from: "127.0.0.1"
 $ make prod
 ```
 
-6. Create `helium.vault.yml` with these configs.
+Here is an [article explaining the above steps in more details](https://clivern.com/installing-nginx-mysql-php-on-ubuntu-22-04/)
+
+
+### Deploy Helium Application
+
+1. Create `helium.vault.yml` with these configs.
 
 ```zsh
 $ ansible-vault create helium.vault.yml
@@ -58,7 +63,7 @@ $ ansible-vault create helium.vault.yml
 app_user: appmgmt
 app_group: appmgmt
 
-app_version: 0.3.0
+app_version: 0.5.0
 git_repo: git@github.com:ionsio/Helium.git
 
 workers_counts: 1
@@ -78,37 +83,37 @@ messenger_transport: doctrine://default
 mailer_dsn: null://null
 ```
 
-7. Run ansible playbook to deploy `Helium` application.
+2. Run ansible playbook to deploy `Helium` application.
 
 ```zsh
 $ make helium
 ```
 
 
-## Versioning
+### Versioning
 
-For transparency into our release cycle and in striving to maintain backward compatibility, Argon is maintained under the [Semantic Versioning guidelines](https://semver.org/) and release process is predictable and business-friendly.
+For transparency into our release cycle and in striving to maintain backward compatibility, Oxygen is maintained under the [Semantic Versioning guidelines](https://semver.org/) and release process is predictable and business-friendly.
 
-See the [Releases section of our GitHub project](https://github.com/ionsio/argon/releases) for changelogs for each release version of Argon. It contains summaries of the most noteworthy changes made in each release. Also see the [Milestones section](https://github.com/ionsio/argon/milestones) for the future roadmap.
-
-
-## Bug tracker
-
-If you have any suggestions, bug reports, or annoyances please report them to our issue tracker at https://github.com/ionsio/argon/issues
+See the [Releases section of our GitHub project](https://github.com/ionsio/oxygen/releases) for changelogs for each release version of Oxygen. It contains summaries of the most noteworthy changes made in each release. Also see the [Milestones section](https://github.com/ionsio/oxygen/milestones) for the future roadmap.
 
 
-## Security Issues
+### Bug tracker
 
-If you discover a security vulnerability within Argon, please send an email to [hello@clivern.com](mailto:hello@clivern.com)
+If you have any suggestions, bug reports, or annoyances please report them to our issue tracker at https://github.com/ionsio/oxygen/issues
 
 
-## Contributing
+### Security Issues
+
+If you discover a security vulnerability within Oxygen, please send an email to [hello@clivern.com](mailto:hello@clivern.com)
+
+
+### Contributing
 
 We are an open source, community-driven project so please feel free to join us. see the [contributing guidelines](CONTRIBUTING.md) for more details.
 
 
-## License
+### License
 
-© 2022, Argon. Released under [Apache License, Version 2.0](https://www.apache.org/licenses/LICENSE-2.0).
+© 2022, Oxygen. Released under [Apache License, Version 2.0](https://www.apache.org/licenses/LICENSE-2.0).
 
-**Argon** is authored and maintained by [@Clivern](https://github.com/Clivern).
+**Oxygen** is authored and maintained by [@Clivern](https://github.com/Clivern).

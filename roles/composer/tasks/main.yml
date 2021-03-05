@@ -13,11 +13,25 @@
 # limitations under the License.
 
 ---
-- hosts: server
+- name: Create composer install script
+  template:
+    src: composer.sh.j2
+    dest: /tmp/composer.sh
+    mode: '0755'
+  tags: [ oxygen, helium ]
 
-  pre_tasks:
-    - name: Include helium vault
-      include_vars: "helium.vault.yml"
+- name: Install composer
+  shell: ./composer.sh
+  args:
+    chdir: /tmp/
+    executable: /bin/bash
+  tags: [ oxygen, helium ]
 
-  roles:
-    - { role: roles/helium, become: yes }
+- name: Move composer globally
+  command: mv /tmp/composer.phar /usr/local/bin/composer
+
+- name: Set permissions on composer
+  become: true
+  file:
+    path: /usr/local/bin/composer
+    mode: "a+x"

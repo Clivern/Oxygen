@@ -20,7 +20,7 @@
     backup: yes
     mode: '0644'
   notify: reload nginx
-  tags: [ argon, helium ]
+  tags: [ oxygen, helium ]
 
 - name: Ensure that the helium site is enabled
   file:
@@ -28,11 +28,11 @@
     dest: /etc/nginx/sites-enabled/helium.app
     state: link
   notify: reload nginx
-  tags: [ argon, helium ]
+  tags: [ oxygen, helium ]
 
 - name: Ensure nginx service is started
   service:
     name: nginx
     state: started
     enabled: yes
-  tags: [ argon, helium ]
+  tags: [ oxygen, helium ]

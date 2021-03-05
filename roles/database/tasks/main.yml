@@ -22,20 +22,20 @@
       - mysql-server
       - mysql-client
     state: present
-  tags: [ argon, database ]
+  tags: [ oxygen, database ]
 
 - name: Make sure pymysql is present
   pip:
     name: pymysql
     state: present
-  tags: [ argon, database ]
+  tags: [ oxygen, database ]
 
 - name: Ensure mysql is started
   service:
     name: mysql
     state: started
     enabled: yes
-  tags: [ argon, database ]
+  tags: [ oxygen, database ]
 
 - name: Set the root password
   mysql_user:
@@ -43,7 +43,7 @@
     password: "{{ root_password }}"
     login_unix_socket: /var/run/mysqld/mysqld.sock
   notify: restart mysql
-  tags: [ argon, database ]
+  tags: [ oxygen, database ]
 
 - name: Remove the test database
   mysql_db:
@@ -51,7 +51,7 @@
     state: absent
     login_user: "{{ root_username }}"
     login_password: "{{ root_password }}"
-  tags: [ argon, database ]
+  tags: [ oxygen, database ]
 
 - name: Removes all anonymous user accounts
   mysql_user:
@@ -60,7 +60,7 @@
     state: absent
     login_user: "{{ root_username }}"
     login_password: "{{ root_password }}"
-  tags: [ argon, database ]
+  tags: [ oxygen, database ]
 
 - name: Create application database
   mysql_db:
@@ -68,7 +68,7 @@
     state: present
     login_user: "{{ root_username }}"
     login_password: "{{ root_password }}"
-  tags: [ argon, database ]
+  tags: [ oxygen, database ]
 
 - name: Create application database user
   mysql_user:
@@ -80,11 +80,11 @@
     login_user: "{{ root_username }}"
     login_password: "{{ root_password }}"
   notify: restart mysql
-  tags: [ argon, database ]
+  tags: [ oxygen, database ]
 
 - name: Create .my.cnf file
   template:
     src: "my.cnf.j2"
     dest: "/root/.my.cnf"
     mode: 0600
-  tags: [ argon, database ]
+  tags: [ oxygen, database ]

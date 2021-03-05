@@ -24,3 +24,4 @@
     - { role: roles/database, become: yes }
     - { role: roles/nginx, become: yes }
     - { role: roles/php, become: yes }
+    - { role: roles/composer, become: yes }

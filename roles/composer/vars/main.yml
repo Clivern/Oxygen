@@ -13,11 +13,3 @@
 # limitations under the License.
 
 ---
-- hosts: server
-
-  pre_tasks:
-    - name: Include helium vault
-      include_vars: "helium.vault.yml"
-
-  roles:
-    - { role: roles/helium, become: yes }
