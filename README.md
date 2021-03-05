@@ -34,13 +34,37 @@ $ ansible-vault create prod.vault.yml
 ```
 
 ```yaml
+install_mysql: true
 root_username: root
 root_password: R2ZBmTR6nED6a71AxeTO2DSck
 app_db_name: helium
 app_db_username: admin
 app_db_password: R2ZBmTR6nED6a71AxeTO2UIok
 allow_access_from: "127.0.0.1"
+
+install_nginx: true
+
+install_php: true
+
+install_composer: true
+
+install_postfix: false
+postfix_hostname: helium
+smtp_sasl_security_options: noanonymous
+smtp_sasl_auth_enable: 'yes'
+smtp_use_tls: 'yes'
+smtp_server: smtp.gmail.com
+smtp_port: 587
+smtp_username: ''
+smtp_password: ''
+inet_interfaces: 127.0.0.1
 ```
+
+`Postfix` is disabled but can be enabled by setting `install_postfix: true` above and providing the SMTP Server, username and password. You can use your gmain account as an SMTP server by doing the following:
+
+- The SMTP server will be `smtp.gmail.com` and port `587`
+- The SMTP username is your gmail email address.
+- The SMTP password can be generated after enabling two factor authentication. Please check this guide to generate the app password https://www.golinuxcloud.com/gmail-smtp-relay-server-postfix/.
 
 5. Run ansible playbook to setup the server
 
@@ -80,7 +104,7 @@ app_secret: 3999bf7e3a408f15942779447e01dd7a
 app_timezone: UTC
 app_env: prod
 messenger_transport: doctrine://default
-mailer_dsn: null://null
+mailer_dsn: sendmail://default
 ```
 
 2. Run ansible playbook to deploy `Helium` application.

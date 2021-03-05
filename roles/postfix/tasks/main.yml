@@ -1,0 +1,106 @@
+# Copyright 2022 Clivern
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+---
+- name: Install required packages
+  apt:
+    pkg:
+      - postfix
+      - libsasl2-modules
+      - mailutils
+    state: present
+  tags: [ oxygen, postfix ]
+
+- name: Ensure postfix service is started
+  service:
+    name: postfix
+    state: started
+    enabled: yes
+  tags: [ oxygen, postfix ]
+
+- name: Update postfix hostname
+  lineinfile:
+    dest: /etc/postfix/main.cf
+    regexp: "^myhostname"
+    line: "myhostname={{ postfix_hostname }}"
+    state: present
+  notify: restart postfix
+  tags: [ oxygen, postfix ]
+
+- name: Update smtp_sasl_auth_enable option
+  lineinfile:
+    dest: /etc/postfix/main.cf
+    regexp: "^smtp_sasl_auth_enable"
+    line: "smtp_sasl_auth_enable = {{ smtp_sasl_auth_enable }}"
+    state: present
+  notify: restart postfix
+  tags: [ oxygen, postfix ]
+
+- name: Update smtp_sasl_security_options option
+  lineinfile:
+    dest: /etc/postfix/main.cf
+    regexp: "^smtp_sasl_security_options"
+    line: "smtp_sasl_security_options = {{ smtp_sasl_security_options }}"
+    state: present
+  notify: restart postfix
+  tags: [ oxygen, postfix ]
+
+- name: Update smtp_sasl_password_maps option
+  lineinfile:
+    dest: /etc/postfix/main.cf
+    regexp: "^smtp_sasl_password_maps"
+    line: "smtp_sasl_password_maps = hash:/etc/postfix/smtp_sasl_password_maps"
+    state: present
+  notify: restart postfix
+  tags: [ oxygen, postfix ]
+
+- name: Update smtp_use_tls option
+  lineinfile:
+    dest: /etc/postfix/main.cf
+    regexp: "^smtp_use_tls"
+    line: "smtp_use_tls = {{ smtp_use_tls }}"
+    state: present
+  notify: restart postfix
+  tags: [ oxygen, postfix ]
+
+- name: Update inet_interfaces option
+  lineinfile:
+    dest: /etc/postfix/main.cf
+    regexp: "^inet_interfaces"
+    line: "inet_interfaces = {{ inet_interfaces }}"
+    state: present
+  notify: restart postfix
+  tags: [ oxygen, postfix ]
+
+- name: Update relayhost option
+  lineinfile:
+    dest: /etc/postfix/main.cf
+    regexp: "^relayhost"
+    line: "relayhost = [{{ smtp_server }}]:{{ smtp_port }}"
+    state: present
+  notify: restart postfix
+  tags: [ oxygen, postfix ]
+
+- name: Create /etc/postfix/smtp_sasl_password_maps file
+  template:
+    src: smtp_sasl_password_maps.j2
+    dest: /etc/postfix/smtp_sasl_password_maps
+    mode: '0600'
+  notify: restart postfix
+  tags: [ oxygen, postfix ]
+
+- name: Update smtp_sasl_password_maps db
+  command: postmap /etc/postfix/smtp_sasl_password_maps
+  notify: restart postfix
+  tags: [ oxygen, postfix ]

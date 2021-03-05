@@ -13,16 +13,13 @@
 # limitations under the License.
 
 ---
-- hosts: server
+- name: restart postfix
+  service:
+    name: postfix
+    state: restarted
+    enabled: yes
 
-  pre_tasks:
-    - name: Include prod vault
-      include_vars: "prod.vault.yml"
-
-  roles:
-    - { role: roles/common, become: yes }
-    - { role: roles/database, become: yes, when: install_mysql == true }
-    - { role: roles/nginx, become: yes, when: install_nginx == true }
-    - { role: roles/php, become: yes, when: install_php == true }
-    - { role: roles/composer, become: yes, when: install_composer == true }
-    - { role: roles/postfix, become: yes, when: install_postfix == true }
+- name: reload postfix
+  service:
+    name: postfix
+    state: reloaded
