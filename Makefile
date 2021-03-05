@@ -12,8 +12,8 @@ help: Makefile
 
 ## config: Install dependencies.
 config:
-	$(PYTHON) -m pip install ansible==7.1.0
-	$(PYTHON) -m pip install ansible-lint==6.10.2
+	$(PYTHON) -m pip install ansible
+	$(PYTHON) -m pip install ansible-lint
 
 
 ## lint: Lint ansible files.
