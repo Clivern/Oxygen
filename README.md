@@ -1,7 +1,7 @@
 <p align="center">
     <img alt="Oxygen Logo" src="/static/logo.png?v=1.0.1" height="150" />
     <h3 align="center">Oxygen</h3>
-    <p align="center">Ansible Playbook to Deploy PHP Services.</p>
+    <p align="center">Ansible Playbook to Deploy A Reliable PHP Services.</p>
     <p align="center">
         <a href="https://github.com/Clivern/Oxygen/actions/workflows/build.yml">
             <img src="https://github.com/Clivern/Oxygen/actions/workflows/build.yml/badge.svg"/>
