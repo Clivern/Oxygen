@@ -153,3 +153,22 @@
     enabled: yes
   with_sequence: start=1 end="{{ workers_counts }}"
   tags: [ oxygen, helium ]
+
+- name: Update log owner and permissions
+  file:
+    dest: /srv/app/shared/log
+    owner: "{{ app_user }}"
+    group: "www-data"
+    mode: "0775"
+    recurse: yes
+  tags: [ oxygen, helium ]
+
+- name: Update cache owner and permissions
+  file:
+    dest: /srv/app/releases/{{ app_version }}/var/cache
+    owner: "{{ app_user }}"
+    group: "www-data"
+    mode: "0775"
+    recurse: yes
+  tags: [ oxygen, helium ]
+
