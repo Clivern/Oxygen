@@ -14,9 +14,9 @@
 
 ---
 galaxy_info:
-  author: Clivern
+  author: clivern
   description: Configures The Server
-  company: Clivern
+  company: clivern
 
   # Choose a valid license ID from https://spdx.org - some suggested licenses:
   # - BSD-3-Clause (default)
@@ -39,12 +39,12 @@ galaxy_info:
   # https://galaxy.ansible.com/api/v1/platforms/
   #
   platforms:
-  - name: Ubuntu
-    versions:
-      - 20.04
-      - 22.04
-      - 18.04
-      - 16.04
+    - name: Ubuntu
+      versions:
+        - 20.04
+        - 22.04
+        - 18.04
+        - 16.04
 
   galaxy_tags: []
     # List tags for your role here, one per line. A tag is a keyword that describes

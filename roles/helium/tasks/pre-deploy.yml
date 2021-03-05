@@ -13,34 +13,25 @@
 # limitations under the License.
 
 ---
-- name: Install required pkgs
-  apt:
-    pkg:
-      - python3-pip
-      - python3-venv
-      - libmysqlclient-dev
-    state: present
-  tags: [ pre-deploy ]
-
 - name: Create the application user
   user:
     name: "{{ app_user }}"
     state: present
-  tags: [ pre-deploy ]
+  tags: [ argon, helium ]
 
 - name: Create the application group
   group:
     name: "{{ app_group }}"
     system: yes
     state: present
-  tags: [ pre-deploy ]
+  tags: [ argon, helium ]
 
 - name: Add the application user to the application group
   user:
     name: "{{ app_user }}"
     group: "{{ app_group }}"
     state: present
-  tags: [ pre-deploy ]
+  tags: [ argon, helium ]
 
 - name: Ensure releases directory exists
   file:
@@ -49,22 +40,13 @@
     group: "{{ app_group }}"
     mode: '0755'
     state: directory
-  tags: [ pre-deploy ]
+  tags: [ argon, helium ]
 
 - name: Ensure shared logs directory exists
   file:
-    path: /srv/app/shared/logs
+    path: /srv/app/shared/log
     owner: "{{ app_user }}"
     group: "{{ app_group }}"
     mode: '0755'
     state: directory
-  tags: [ pre-deploy ]
-
-- name: Ensure shared mount directory exists
-  file:
-    path: /srv/app/shared/mount
-    owner: "{{ app_user }}"
-    group: "{{ app_group }}"
-    mode: '0755'
-    state: directory
-  tags: [ pre-deploy ]
+  tags: [ argon, helium ]

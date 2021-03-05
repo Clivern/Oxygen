@@ -24,15 +24,15 @@
     name: nginx
     state: reloaded
 
-- name: reload ionsio service
+- name: reload helium watcher service
   systemd:
     state: restarted
     daemon_reload: yes
-    name: ionsio
+    name: helium_watcher
 
-- name: reload workers service
+- name: reload helium workers service
   systemd:
     state: restarted
     daemon_reload: yes
-    name: worker@{{ item }}
+    name: helium_worker@{{ item }}
   with_sequence: start=1 end="{{ workers_counts }}"

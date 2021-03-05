@@ -13,39 +13,26 @@
 # limitations under the License.
 
 ---
-- name: Install nginx
-  apt:
-    name=nginx
-    state=present
-  tags: [ nginx ]
-
 - name: Create the nginx configuration file
   template:
-    src: ionsio.sh.j2
-    dest: /etc/nginx/sites-available/ionsio.sh
+    src: helium.app.j2
+    dest: /etc/nginx/sites-available/helium.app
     backup: yes
     mode: '0644'
   notify: reload nginx
-  tags: [ nginx ]
+  tags: [ argon, helium ]
 
-- name: Ensure that the default site is disabled
+- name: Ensure that the helium site is enabled
   file:
-    path: /etc/nginx/sites-enabled/default
-    state: absent
-  notify: reload nginx
-  tags: [ nginx ]
-
-- name: Ensure that the application site is enabled
-  file:
-    src: /etc/nginx/sites-available/ionsio.sh
-    dest: /etc/nginx/sites-enabled/ionsio.sh
+    src: /etc/nginx/sites-available/helium.app
+    dest: /etc/nginx/sites-enabled/helium.app
     state: link
   notify: reload nginx
-  tags: [ nginx ]
+  tags: [ argon, helium ]
 
 - name: Ensure nginx service is started
   service:
     name: nginx
     state: started
     enabled: yes
-  tags: [ nginx ]
+  tags: [ argon, helium ]

@@ -1,5 +1,5 @@
 [Unit]
-Description=Gunicorn Instance to Serve Ionsio
+Description=Helium Watcher
 After=network.target
 
 StartLimitIntervalSec=500
@@ -11,9 +11,13 @@ Group=www-data
 WorkingDirectory=/srv/app/current
 Restart=on-failure
 RestartSec=5s
-ExecStart=/srv/app/current/venv/bin/gunicorn --workers 3 --bind unix:/run/ionsio.sock app.wsgi
+Environment=LANG=en_US.UTF-8
+Environment=LC_ALL=en_US.UTF-8
+Environment=LC_LANG=en_US.UTF-8
+ExecStart=php /srv/app/current/bin/console watch
 ExecReload=/bin/kill -s HUP $MAINPID
 ExecStop=/bin/kill -s TERM $MAINPID
+PrivateTmp=true
 
 [Install]
 WantedBy=multi-user.target
