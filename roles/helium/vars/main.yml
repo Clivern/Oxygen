@@ -46,3 +46,5 @@ app_timezone: UTC
 app_env: prod
 messenger_transport: doctrine://default
 mailer_dsn: null://null
+
+demo_mode: disabled
