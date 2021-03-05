@@ -14,8 +14,8 @@
 
 ---
 enable_fw: yes
-upgrade_pkgs: yes
-update_pkgs: yes
+upgrade_pkgs: no
+update_pkgs: no
 
-system_user: argon
-system_group: argon
+system_user: appmgmt
+system_group: appmgmt

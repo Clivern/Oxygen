@@ -13,8 +13,6 @@
 # limitations under the License.
 
 ---
-hostname: argon.sh
-
 nginx_logrotate_scripts:
   - name: nginx
     log_dir: '/var/log/nginx'

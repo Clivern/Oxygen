@@ -20,10 +20,16 @@ lint:
 	ansible-lint -v
 
 
-## run: Configure the server.
-run:
+## prod: Configure the server.
+prod:
 	@echo "\n>> ============= Run ============= <<"
-	ansible-playbook playbook.yml --ask-vault-pass
+	ansible-playbook prod-playbook.yml --ask-vault-pass
 
 
-.PHONY: help run lint config
+## helium: Deploy Helium application.
+helium:
+	@echo "\n>> ============= Run ============= <<"
+	ansible-playbook helium-playbook.yml --ask-vault-pass
+
+
+.PHONY: help prod lint config helium

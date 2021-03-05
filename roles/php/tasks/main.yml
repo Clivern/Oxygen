@@ -13,3 +13,25 @@
 # limitations under the License.
 
 ---
+- name: Install php and php-fpm packages
+  apt:
+    pkg:
+      - php{{ php_version }}-fpm
+      - php{{ php_version }}-common
+      - php{{ php_version }}-mysql
+      - php{{ php_version }}-xml
+      - php{{ php_version }}-xmlrpc
+      - php{{ php_version }}-curl
+      - php{{ php_version }}-gd
+      - php{{ php_version }}-imagick
+      - php{{ php_version }}-cli
+      - php{{ php_version }}-dev
+      - php{{ php_version }}-imap
+      - php{{ php_version }}-mbstring
+      - php{{ php_version }}-soap
+      - php{{ php_version }}-zip
+      - php{{ php_version }}-bcmath
+    state: present
+  tags: [ argon, php ]
+
+

@@ -34,14 +34,36 @@ $ ansible-vault create prod.vault.yml
 ```
 
 ```yaml
+root_username: root
+root_password: R2ZBmTR6nED6a71AxeTO2DSck
+app_db_name: helium
+app_db_username: admin
+app_db_password: R2ZBmTR6nED6a71AxeTO2UIok
+allow_access_from: "127.0.0.1"
+```
+
+5. Run ansible playbook to setup the server
+
+```zsh
+$ make prod
+```
+
+6. Create `helium.vault.yml` with these configs.
+
+```zsh
+$ ansible-vault create helium.vault.yml
+```
+
+```yaml
 key: value
 ```
 
-5. Run ansible playbook
+7. Run ansible playbook to deploy `Helium` application.
 
 ```zsh
-$ make run
+$ make prod
 ```
+
 
 ## Versioning
 

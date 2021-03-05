@@ -13,3 +13,14 @@
 # limitations under the License.
 
 ---
+- hosts: server
+
+  pre_tasks:
+    - name: Include prod vault
+      include_vars: "prod.vault.yml"
+
+  roles:
+    - { role: roles/common }
+    - { role: roles/database }
+    - { role: roles/nginx }
+    - { role: roles/php }

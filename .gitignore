@@ -2,3 +2,4 @@
 hosts.prod
 venv
 prod.vault.yml
+helium.vault.yml
