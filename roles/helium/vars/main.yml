@@ -28,7 +28,7 @@ helium_logrotate_scripts:
 app_user: appmgmt
 app_group: appmgmt
 
-app_version: 0.7.0
+app_version: 1.0.0
 git_repo: git@github.com:Colvern/Helium.git
 
 workers_counts: 1
