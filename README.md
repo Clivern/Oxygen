@@ -1,7 +1,7 @@
 <p align="center">
-    <img alt="Oxygen Logo" src="/static/logo.png?v=1.0.1" height="150" />
+    <img alt="Oxygen Logo" src="/static/logo.png?v=1.4.0" height="150" />
     <h3 align="center">Oxygen</h3>
-    <p align="center">Ansible Playbook to Deploy A Reliable PHP Services.</p>
+    <p align="center">Ansible Collection to Deploy A Reliable PHP Services.</p>
     <p align="center">
         <a href="https://github.com/Clivern/Oxygen/actions/workflows/build.yml">
             <img src="https://github.com/Clivern/Oxygen/actions/workflows/build.yml/badge.svg"/>
@@ -9,6 +9,12 @@
     </p>
 </p>
 <br/>
+
+### Usage
+
+Please check examples directory for working examples:
+
+- `examples/server-setup/ubuntu/22.04:` This will setup ubuntu 22.04 with `Nginx`, `PHP-FPM`, `PHP 8.1`, `Logrotate` ... etc
 
 
 ### Versioning
