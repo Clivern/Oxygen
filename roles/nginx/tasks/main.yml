@@ -1,4 +1,4 @@
-# Copyright 2021 Ionsio
+# Copyright 2022 Clivern
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,12 +21,12 @@
       - apache2-utils
       - python3-pip
     state: present
-  tags: [ argon, reverse_proxy ]
+  tags: [ argon, nginx ]
 
 - name: Install passlib python package
   pip:
     name: passlib
-  tags: [ argon, reverse_proxy ]
+  tags: [ argon, nginx ]
 
 - name: Create the nginx configuration file
   template:
@@ -35,25 +35,14 @@
     backup: yes
     mode: '0644'
   notify: reload nginx
-  tags: [ argon, reverse_proxy ]
+  tags: [ argon, nginx ]
 
 - name: Ensure that the default site is disabled
   file:
     path: /etc/nginx/sites-enabled/default
     state: absent
   notify: reload nginx
-  tags: [ argon, reverse_proxy ]
-
-- name: Enable basic authentication
-  htpasswd:
-    path: /etc/nginx/.htpasswd
-    name: "{{ http_basic_auth_username }}"
-    password: "{{ http_basic_auth_password }}"
-    owner: root
-    group: www-data
-    mode: 0640
-  notify: restart nginx
-  tags: [ argon, reverse_proxy ]
+  tags: [ argon, nginx ]
 
 - name: Ensure that argon site is enabled
   file:
@@ -61,14 +50,14 @@
     dest: /etc/nginx/sites-enabled/argon.sh
     state: link
   notify: reload nginx
-  tags: [ argon, reverse_proxy ]
+  tags: [ argon, nginx ]
 
 - name: Ensure nginx service is started
   service:
     name: nginx
     state: started
     enabled: yes
-  tags: [ argon, reverse_proxy ]
+  tags: [ argon, nginx ]
 
 - name: Setup logrotate scripts
   template:
@@ -77,22 +66,13 @@
     mode: "0644"
   with_items: "{{ nginx_logrotate_scripts }}"
   when: nginx_logrotate_scripts is defined
-  tags: [ argon, reverse_proxy ]
+  tags: [ argon, nginx ]
 
-- name: Block access prometheus, alertmanager, node_exporter ... etc except from localhost
+- name: Block access to port 8000 except from localhost
   shell: |
-    iptables -A INPUT -p tcp -s localhost --dport 9090 -j ACCEPT
-    iptables -A INPUT -p tcp --dport 9090 -j DROP
-
-    iptables -A INPUT -p tcp -s localhost --dport 9100 -j ACCEPT
-    iptables -A INPUT -p tcp --dport 9100 -j DROP
-
-    iptables -A INPUT -p tcp -s localhost --dport 9093 -j ACCEPT
-    iptables -A INPUT -p tcp --dport 9093 -j DROP
-
-    iptables -A INPUT -p tcp -s localhost --dport 3000 -j ACCEPT
-    iptables -A INPUT -p tcp --dport 3000 -j DROP
+    iptables -A INPUT -p tcp -s localhost --dport 8000 -j ACCEPT
+    iptables -A INPUT -p tcp --dport 8000 -j DROP
 
     iptables-save > /etc/iptables/rules.v4
   become: yes
-  tags: [ argon, reverse_proxy ]
+  tags: [ argon, nginx ]

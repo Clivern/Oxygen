@@ -1,4 +1,4 @@
-# Copyright 2021 Ionsio
+# Copyright 2022 Clivern
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,7 +16,7 @@
 galaxy_info:
   author: clivern
   description: Configure Nginx Reverse Proxy
-  company: ionsio
+  company: clivern
 
   # Choose a valid license ID from https://spdx.org - some suggested licenses:
   # - BSD-3-Clause (default)

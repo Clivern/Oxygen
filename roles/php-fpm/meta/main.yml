@@ -15,12 +15,8 @@
 ---
 galaxy_info:
   author: clivern
-  description: Installs Database Server
-  company: ionsio
-
-  # If the issue tracker for your role is not on github, uncomment the
-  # next line and provide a value
-  # issue_tracker_url: http://example.com/issue/tracker
+  description: Installs PHP-FPM
+  company: clivern
 
   # Choose a valid license ID from https://spdx.org - some suggested licenses:
   # - BSD-3-Clause (default)
@@ -42,17 +38,13 @@ galaxy_info:
   # To view available platforms and versions (or releases), visit:
   # https://galaxy.ansible.com/api/v1/platforms/
   #
-  # platforms:
-  # - name: Fedora
-  #   versions:
-  #   - all
-  #   - 25
-  # - name: SomePlatform
-  #   versions:
-  #   - all
-  #   - 1.0
-  #   - 7
-  #   - 99.99
+  platforms:
+  - name: Ubuntu
+    versions:
+      - 20.04
+      - 22.04
+      - 18.04
+      - 16.04
 
   galaxy_tags: []
     # List tags for your role here, one per line. A tag is a keyword that describes

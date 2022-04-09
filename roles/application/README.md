@@ -1,4 +1,4 @@
-### Ubuntu Application Ansible Role
+### Application Ansible Role
 
 This role deploys the application. Available configs to override:
 

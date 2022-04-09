@@ -1,7 +1,7 @@
 <p align="center">
     <img alt="Argon Logo" src="/static/logo.png?v=1.0.1" height="150" />
     <h3 align="center">Argon</h3>
-    <p align="center">PHP Systems Deployment Ansible Playbook.</p>
+    <p align="center">Ansible Playbook to Deploy PHP Services.</p>
     <p align="center">
         <a href="https://github.com/ionsio/Argon/actions/workflows/build.yml">
             <img src="https://github.com/ionsio/Argon/actions/workflows/build.yml/badge.svg"/>

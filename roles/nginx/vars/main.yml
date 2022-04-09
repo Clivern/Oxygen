@@ -1,4 +1,4 @@
-# Copyright 2021 Ionsio
+# Copyright 2022 Clivern
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,14 +14,6 @@
 
 ---
 hostname: argon.sh
-
-http_basic_auth_username: admin
-http_basic_auth_password: admin
-
-grafana_hostname: grafana
-prometheus_hostname: prometheus
-alertmanager_hostname: alertmanager
-node_exporter_hostname: node_exporter
 
 nginx_logrotate_scripts:
   - name: nginx

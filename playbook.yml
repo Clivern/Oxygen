@@ -1,4 +1,4 @@
-# Copyright 2021 Ionsio
+# Copyright 2022 Clivern
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,8 +21,8 @@
 
   roles:
     - { role: roles/common }
-    - { role: roles/prometheus }
-    - { role: roles/node_exporter }
-    - { role: roles/alertmanager }
-    - { role: roles/grafana }
-    - { role: roles/reverse_proxy }
+    - { role: roles/database }
+    - { role: roles/nginx }
+    - { role: roles/php }
+    - { role: roles/php-fpm }
+    - { role: roles/application }
