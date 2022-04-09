@@ -1,0 +1,124 @@
+# Copyright 2021 Ionsio
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+---
+- name: Update packages
+  apt:
+    update_cache: yes
+  when: update_pkgs | bool
+  tags: [ argon, common ]
+
+- name: Upgrade packages
+  become: true
+  apt:
+    upgrade: yes
+    update_cache: yes
+    cache_valid_time: 86400
+  when: upgrade_pkgs | bool
+  tags: [ argon, common ]
+
+- name: Remove dependencies that are no longer required
+  apt:
+    autoremove: yes
+  when: upgrade_pkgs | bool
+  tags: [ argon, common ]
+
+- name: Create the system username
+  user:
+    name: "{{ system_user }}"
+    state: present
+    system: yes
+    shell: /sbin/nologin
+    createhome: "no"
+  tags: [ argon, common ]
+
+- name: Create the system group
+  group:
+    name: "{{ system_group }}"
+    system: yes
+    state: present
+  tags: [ argon, common ]
+
+- name: Add the system user to the system group
+  user:
+    name: "{{ system_user }}"
+    group: "{{ system_group }}"
+    state: present
+  tags: [ argon, common ]
+
+- name: Install basic package
+  apt:
+    pkg: ufw
+    state: present
+    update_cache: true
+  tags: [ argon, common ]
+
+- name: Install logrotate
+  package:
+    name: logrotate
+    state: present
+  tags: [ argon, common ]
+
+- name: Install unzip package
+  apt:
+    pkg: unzip
+    state: present
+    update_cache: true
+  tags: [ argon, common ]
+
+- name: Disallow password authentication
+  lineinfile:
+    dest: /etc/ssh/sshd_config
+    regexp: "^PasswordAuthentication"
+    line: "PasswordAuthentication no"
+    state: present
+  notify: restart sshd
+  tags: [ argon, common ]
+
+- name: Activate firewall
+  ufw:
+    state: enabled
+    policy: deny
+  when: enable_fw
+  tags: [ argon, common ]
+
+- name: Firewall allow SSH
+  ufw:
+    rule: allow
+    name: OpenSSH
+  when: enable_fw
+  tags: [ argon, common ]
+
+- name: Firewall allow HTTP
+  ufw:
+    rule: allow
+    port: '80'
+    proto: tcp
+  when: enable_fw
+  tags: [ argon, common ]
+
+- name: Firewall allow HTTPs
+  ufw:
+    rule: allow
+    port: '443'
+    proto: tcp
+  when: enable_fw
+  tags: [ argon, common ]
+
+- name: Set motd banner
+  template:
+    src: "motd.j2"
+    dest: "/etc/motd"
+    mode: 0700
+  tags: [ argon, common ]

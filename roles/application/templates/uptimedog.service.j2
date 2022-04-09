@@ -1,0 +1,19 @@
+[Unit]
+Description=Gunicorn Instance to Serve Ionsio
+After=network.target
+
+StartLimitIntervalSec=500
+StartLimitBurst=5
+
+[Service]
+User=root
+Group=www-data
+WorkingDirectory=/srv/app/current
+Restart=on-failure
+RestartSec=5s
+ExecStart=/srv/app/current/venv/bin/gunicorn --workers 3 --bind unix:/run/ionsio.sock app.wsgi
+ExecReload=/bin/kill -s HUP $MAINPID
+ExecStop=/bin/kill -s TERM $MAINPID
+
+[Install]
+WantedBy=multi-user.target

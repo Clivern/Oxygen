@@ -1,0 +1,66 @@
+map $http_upgrade $connection_upgrade {
+  default upgrade;
+  '' close;
+}
+
+server {
+    listen 80;
+    listen [::]:80;
+    server_name {{ grafana_hostname }}.{{ hostname }};
+
+    location / {
+        proxy_set_header Host $http_host;
+        proxy_pass http://127.0.0.1:3000;
+    }
+
+    # Proxy Grafana Live WebSocket connections.
+    location /api/live/ {
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection $connection_upgrade;
+        proxy_set_header Host $http_host;
+        proxy_pass http://127.0.0.1:3000;
+    }
+}
+
+server {
+    listen 80;
+    listen [::]:80;
+    server_name {{ prometheus_hostname }}.{{ hostname }};
+
+    auth_basic           "Administrator Area";
+    auth_basic_user_file /etc/nginx/.htpasswd;
+
+    location / {
+        proxy_set_header Host $http_host;
+        proxy_pass http://127.0.0.1:9090;
+    }
+}
+
+server {
+    listen 80;
+    listen [::]:80;
+    server_name {{ alertmanager_hostname }}.{{ hostname }};
+
+    auth_basic           "Administrator Area";
+    auth_basic_user_file /etc/nginx/.htpasswd;
+
+    location / {
+        proxy_set_header Host $http_host;
+        proxy_pass http://127.0.0.1:9093;
+    }
+}
+
+server {
+    listen 80;
+    listen [::]:80;
+    server_name {{ node_exporter_hostname }}.{{ hostname }};
+
+    auth_basic           "Administrator Area";
+    auth_basic_user_file /etc/nginx/.htpasswd;
+
+    location / {
+        proxy_set_header Host $http_host;
+        proxy_pass http://127.0.0.1:9100;
+    }
+}
