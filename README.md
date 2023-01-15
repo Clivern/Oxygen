@@ -81,7 +81,7 @@ mailer_dsn: null://null
 7. Run ansible playbook to deploy `Helium` application.
 
 ```zsh
-$ make prod
+$ make helium
 ```
 
 
